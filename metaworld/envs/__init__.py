@@ -50,6 +50,7 @@ from metaworld.envs.sawyer_sweep_into_goal_v3 import SawyerSweepIntoGoalEnvV3
 from metaworld.envs.sawyer_sweep_v3 import SawyerSweepEnvV3
 from metaworld.envs.sawyer_window_close_v3 import SawyerWindowCloseEnvV3
 from metaworld.envs.sawyer_window_open_v3 import SawyerWindowOpenEnvV3
+from metaworld.envs.sawyer_drawer_open_close_v3 import SawyerDrawerOpenCloseEnvV3
 
 __all__ = [
     "SawyerNutAssemblyEnvV3",
@@ -102,4 +103,5 @@ __all__ = [
     "SawyerSweepIntoGoalEnvV3",
     "SawyerWindowCloseEnvV3",
     "SawyerWindowOpenEnvV3",
+    "SawyerDrawerOpenCloseEnvV3"
 ]
