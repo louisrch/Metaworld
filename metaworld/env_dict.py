@@ -74,7 +74,7 @@ ENV_CLS_MAP = {
     "sweep-v3": envs.SawyerSweepEnvV3,
     "window-open-v3": envs.SawyerWindowOpenEnvV3,
     "window-close-v3": envs.SawyerWindowCloseEnvV3,
-    "drawer-open-close-v3" : envs.SawyerDrawerOpenCloseEnvV3
+    "drawer-open-close-v3" : envs.SawyerDrawerOpenCloseEnvV3,
 }
 
 
