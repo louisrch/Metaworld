@@ -196,3 +196,36 @@ class SawyerDrawerOpenCloseEnvV3(SawyerXYZEnv):
             reward = reachRew + pullRew
 
             return reward, 0.0, 0.0, pullDist, 0.0, 0.0
+        
+    
+    @_Decorators.assert_task_is_set
+    def step(
+        self, action: npt.NDArray[np.float32]
+    ) -> tuple[npt.NDArray[np.float64], SupportsFloat, bool, bool, dict[str, Any]]:
+        """Step the environment.
+
+        Args:
+            action: The action to take. Must be a 4 element array of floats.
+
+        Returns:
+            The (next_obs, reward, terminated, truncated, info) tuple.
+        """
+        obs, reward, terminated, truncated, info = super.step(action)
+        obs = np.concatenate([obs, np.array([self.has_been_opened], dtype=np.float64)], axis=0)
+        return obs, reward, terminated, truncated, info
+    
+        def reset(
+        self, seed: int | None = None, options: dict[str, Any] | None = None
+    ) -> tuple[npt.NDArray[np.float64], dict[str, Any]]:
+        """Resets the environment.
+
+        Args:
+            seed: The seed to use. Ignored, use `seed()` instead.
+            options: Additional options to pass to the environment. Ignored.
+
+        Returns:
+            The `(obs, info)` tuple.
+        """
+        obs, info = super().reset(seed, options)
+        obs = np.concatenate([obs, np.array([self.has_been_opened], dtype=np.float64)], axis=0)
+        return obs, info 
