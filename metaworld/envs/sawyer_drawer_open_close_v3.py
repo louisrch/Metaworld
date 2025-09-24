@@ -5,6 +5,7 @@ from typing import Any
 import numpy as np
 import numpy.typing as npt
 from gymnasium.spaces import Box
+from typing import Any, Callable, Literal, SupportsFloat
 
 from metaworld.asset_path_utils import full_V3_path_for
 from metaworld.sawyer_xyz_env import RenderMode, SawyerXYZEnv
@@ -198,7 +199,7 @@ class SawyerDrawerOpenCloseEnvV3(SawyerXYZEnv):
             return reward, 0.0, 0.0, pullDist, 0.0, 0.0
         
     
-    @_Decorators.assert_task_is_set
+    @SawyerXYZEnv._Decorators.assert_task_is_set
     def step(
         self, action: npt.NDArray[np.float32]
     ) -> tuple[npt.NDArray[np.float64], SupportsFloat, bool, bool, dict[str, Any]]:
@@ -210,12 +211,12 @@ class SawyerDrawerOpenCloseEnvV3(SawyerXYZEnv):
         Returns:
             The (next_obs, reward, terminated, truncated, info) tuple.
         """
-        obs, reward, terminated, truncated, info = super.step(action)
+        obs, reward, terminated, truncated, info = super().step(action)
         obs = np.concatenate([obs, np.array([self.has_been_opened], dtype=np.float64)], axis=0)
         return obs, reward, terminated, truncated, info
     
-        def reset(
-        self, seed: int | None = None, options: dict[str, Any] | None = None
+    def reset(
+    self, seed: int | None = None, options: dict[str, Any] | None = None
     ) -> tuple[npt.NDArray[np.float64], dict[str, Any]]:
         """Resets the environment.
 
